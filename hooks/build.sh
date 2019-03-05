@@ -11,11 +11,12 @@ docker build . \
 
 image_id=$(docker images $TAG --format "{{.ID}}")
 
-for tag in ${EXTRA_TAGS//;/$'\n'}
+for extra_tag in ${EXTRA_TAGS//;/$'\n'}
 do
-    echo $tag
-    docker tag $image_id "${REPO_NAME}:${tag}"
+    echo $TAG
+    echo $extra_tag
+    docker tag $TAG "${REPO_NAME}:${extra_tag}"
 done
 
-docker run --rm --entrypoint php "${REPO_NAME}:${VERSION}" --version
-docker run --rm --entrypoint php "${REPO_NAME}:${VERSION}" -m
+docker run --rm --entrypoint php $TAG --version
+docker run --rm --entrypoint php $TAG -m
