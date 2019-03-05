@@ -1,6 +1,6 @@
 ARG VERSION
 
-FROM php:$VERSION
+FROM php:$VERSION-$BASE_IMAGE
 
 LABEL maintainer="Norby Baruani <norbybaru@gmail.com/>"
 
