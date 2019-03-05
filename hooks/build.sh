@@ -11,6 +11,8 @@ docker build . \
 
 image_id=$(docker images $TAG --format "{{.ID}}")
 
+docker images
+
 for extra_tag in ${EXTRA_TAGS//;/$'\n'}
 do
     echo $TAG
