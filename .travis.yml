@@ -1,0 +1,16 @@
+language: bash
+services: docker
+
+env:
+  - REPO_NAME=norby/php
+  - VERSION=7.1 EXTRA_TAGS="7.1-fpm-alpine"
+  - VERSION=7.2 EXTRA_TAGS="latest-fpm-alpine; 7.2-fpm-alpine"
+
+install:
+  - git clone https://github.com/docker-library/official-images.git ~/official-images
+
+script:
+  - "./hooks/build.sh"
+
+after_script:
+  - docker images
