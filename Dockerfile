@@ -1,4 +1,4 @@
-ARG VERSION=7.1-fpm-alpine
+ARG VERSION
 
 FROM php:$VERSION
 
