@@ -7,7 +7,8 @@ set -x
 docker build . \
     --no-cache \
     -t "$TAG" \
-    --build-arg VERSION=$VERSION
+    --build-arg VERSION=$VERSION \
+    --build-arg BASE_IMAGE=$BASE_IMAGE
 
 image_id=$(docker images $TAG --format "{{.ID}}")
 
