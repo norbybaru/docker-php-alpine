@@ -8,7 +8,7 @@ if [ "${SOURCE_BRANCH}" != "master" ]; then
     exit 0
 fi
 
-for tag in $(sudo docker images $REPO_NAME --format "{{.Tag}}");
+for tag in $(docker images $REPO_NAME --format "{{.Tag}}");
 do
     docker push "${REPO_NAME}:${tag}"
 done
