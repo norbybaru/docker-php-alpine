@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# norby/php:7.1
+# norby/php-alpine:7.1
 TAG="${REPO_NAME}:${VERSION}"
 
 set -x
