@@ -4,10 +4,10 @@ services: docker
 env:
   global:
     - REPO_NAME=norby/php-alpine
-    - BASE_IMAGE=fpm-alpine
   matrix:
-    - VERSION=7.1 EXTRA_TAGS="7.1-fpm"
-    - VERSION=7.2 EXTRA_TAGS="latest-fpm; 7.2-fpm"
+    - BASE_IMAGE=fpm-alpine VERSION=7.1 EXTRA_TAGS="7.1-fpm"
+    - BASE_IMAGE=fpm-alpine VERSION=7.2 EXTRA_TAGS="latest-fpm; 7.2-fpm"
+    - BASE_IMAGE=cli-apline VERSION=7.1 EXTRA_TAGS="latest-cli;7.1-cli"
 
 install:
   - git clone https://github.com/docker-library/official-images.git ~/official-images
