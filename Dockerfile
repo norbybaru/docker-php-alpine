@@ -30,7 +30,7 @@ RUN apk update \
         composer \
         nodejs \
         bash > /dev/null \
-    && docker-php-configure \
+    && docker-php-ext-configure \
         zip --with-libzip > /dev/null \    
     && docker-php-ext-install \
         curl \
