@@ -3,7 +3,7 @@
 # norby/php-alpine:7.1
 TAG="${REPO_NAME}:${VERSION}"
 
-set -x
+set -Ex
 docker build . \
     --no-cache \
     -t "$TAG" \

@@ -16,6 +16,8 @@ RUN apk update \
         make \
         gcc > /dev/null \
     && apk add --no-cache \
+        zlib-dev \
+        libzip-dev \
         curl \
         imagemagick \
         mysql-client \
@@ -28,6 +30,8 @@ RUN apk update \
         composer \
         nodejs \
         bash > /dev/null \
+    && docker-php-ext-configure \
+        zip --with-libzip > /dev/null \    
     && docker-php-ext-install \
         curl \
         iconv \
