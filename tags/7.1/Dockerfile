@@ -6,7 +6,9 @@ FROM php:$VERSION-$BASE_IMAGE
 LABEL maintainer="Norby Baruani <norbybaru@gmail.com/>"
 
 # Install any custom system requirements here
-RUN apk update \
+RUN set -eux \
+    && apk update \
+    && apk upgrade \
     && apk add --no-cache --virtual .build_deps \
         $PHPIZE_DEPS \
         curl-dev \
