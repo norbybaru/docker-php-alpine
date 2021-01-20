@@ -4,12 +4,12 @@
 TAG="${REPO_NAME}:${VERSION}"
 
 set -eux
-docker build \
+DOCKER_BUILDKIT=1 docker build \
     --no-cache \
     -t "$TAG" \
+    --build-arg BUILDKIT_INLINE_CACHE=1 \
     --build-arg VERSION=$VERSION \
     --build-arg BASE_IMAGE=$BASE_IMAGE \
-    -f "tags/$VERSION/Dockerfile" \
     .
 
 image_id=$(docker images $TAG --format "{{.ID}}")
