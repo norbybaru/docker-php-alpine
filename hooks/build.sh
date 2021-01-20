@@ -3,12 +3,14 @@
 # norby/php-alpine:7.1
 TAG="${REPO_NAME}:${VERSION}"
 
-set -Ex
-docker build . \
+set -eux
+docker build \
     --no-cache \
     -t "$TAG" \
     --build-arg VERSION=$VERSION \
-    --build-arg BASE_IMAGE=$BASE_IMAGE
+    --build-arg BASE_IMAGE=$BASE_IMAGE \
+    -f "tags/$VERSION/Dockerfile" \
+    .
 
 image_id=$(docker images $TAG --format "{{.ID}}")
 
@@ -21,5 +23,6 @@ do
     docker tag $TAG "${REPO_NAME}:${extra_tag}"
 done
 
+docker run --rm --entrypoint composer $TAG --version
 docker run --rm --entrypoint php $TAG --version
 docker run --rm --entrypoint php $TAG -m
