@@ -4,7 +4,7 @@
 TAG="${REPO_NAME}:${VERSION}"
 
 set -eux
-DOCKER_BUILDKIT=1 docker build \
+docker build \
     --no-cache \
     -t "$TAG" \
     --build-arg BUILDKIT_INLINE_CACHE=1 \
