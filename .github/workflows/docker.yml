@@ -40,4 +40,5 @@ jobs:
         run: ./hooks/build.sh
       
       - name: Docker Push
+        if: github.ref == 'refs/heads/master'
         run: ./hooks/push.sh
