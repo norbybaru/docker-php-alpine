@@ -1,0 +1,43 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        base-image: [fpm-alpine, cli-alpine]
+        php: [7.4, 8.0, 8.1]
+        include:
+          - base-image: fpm-alpine
+            prefix: fpm
+          - base-image: cli-alpine
+            prefix: cli
+
+    name: PHP:${{ matrix.php }} - IMAGE:${{ matrix.base-image }} - PREFIX:${{ matrix.prefix }}
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: docker login
+        env:
+          DOCKER_USER: ${{secrets.DOCKER_USER}}
+          DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+        run: |
+          docker login -u $DOCKER_USER -p $DOCKER_PASSWORD 
+      - name: Build the Docker image
+        env:
+          REPO_NAME: norby/php-alpine
+          BASE_IMAGE: ${{ matrix.base-image }}
+          VERSION: ${{ matrix.php }}
+          EXTRA_TAGS: "${{ matrix.php }}-${{ matrix.prefix }}"
+        run: ./hooks/build.sh
+      
+      - name: Docker Push
+        run: ./hooks/push
